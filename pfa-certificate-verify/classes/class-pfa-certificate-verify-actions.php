@@ -80,7 +80,7 @@ class pfa_certificate_verifier_Actions {
             array( 
                 'title' => __( 'Certificate Verifier Page', 'Pfa_Certificate_Verify' ), 
                 'type' => 'title', 
-                 'desc' => __( 'This pages need to be set so that WooCommerce knows where to send users to send links functionality.', 'Pfa_Certificate_Verify' ), 
+                'desc' => __( 'This pages need to be set so that WooCommerce knows where to send users to verify the Certificates.'  . ' [certificate_verifier_form]', 'Pfa_Certificate_Verify' ), 
                  'id' => 'certificate_verifier_options' ),
 
 			array(
