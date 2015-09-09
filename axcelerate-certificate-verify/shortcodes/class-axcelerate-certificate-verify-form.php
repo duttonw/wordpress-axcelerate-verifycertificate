@@ -1,12 +1,12 @@
 <?php
 /**
- * Points To Link Send Form
+ * Axcelerate Certificate Validation
  *
  * Shows the 'certificateform' or 'certificatesuccess'
  *
  * @author 		William dutton
  * @category 	Shortcodes
- * @package 	Pfa_Certificate_Verify/Shortcodes/Certificate_Verify_Form
+ * @package 	Axcelerate_Cert_Validation/Shortcodes/Certificate_Verify_Form
  * @version     2.0.0
  */
 
@@ -41,18 +41,18 @@ class Certificate_Verify_Form {
 	 */
 	private static function form( $atts ) {
     global $wc_points_rewards;
-    global $Pfa_Certificate_Verify;
+    global $Axcelerate_Cert_Validation;
 	
-	if ($Pfa_Certificate_Verify->successfulPost == true) {
+	if ($Axcelerate_Cert_Validation->successfulPost == true) {
 	
 			// load the template
 		woocommerce_get_template(
 			'certificatesuccess.php',
 			array(
-				'result' => $Pfa_Certificate_Verify->result,
+				'result' => $Axcelerate_Cert_Validation->result,
 			),
 			'',
-			$Pfa_Certificate_Verify->get_plugin_path() . '/templates/'
+			$Axcelerate_Cert_Validation->get_plugin_path() . '/templates/'
 		);
 		
 	} else {
@@ -65,7 +65,7 @@ class Certificate_Verify_Form {
 				
 			),
 			'',
-			$Pfa_Certificate_Verify->get_plugin_path() . '/templates/'
+			$Axcelerate_Cert_Validation->get_plugin_path() . '/templates/'
 		);
 	}
 	}

@@ -5,16 +5,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Axcelerate Certificate Validation
+ *
  * Handle frontend forms
  *
- * @class 		pfa_certificate_verifier_Handler
+ * @class 		axcelerate_certificate_verifier_Handler
  * @version		2.2.0
- * @package		Pfa_Certificate_Verify/Classes/
+ * @package		Axcelerate_Cert_Validation/Classes/
  * @category	Class
  * @copyright Copyright (c) 2015, Enhance Industries
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
-class pfa_certificate_verifier_Handler {
+class axcelerate_certificate_verifier_Handler {
 
 	/**
 	 * Hook in methods
@@ -23,7 +25,7 @@ class pfa_certificate_verifier_Handler {
 		add_action( 'init', array( __CLASS__, 'process_verify_certificate' ) );
 	}
 		
-      public static function pfa_form_validate($validation_array) {
+      public static function axcelerate_form_validate($validation_array) {
         foreach ( $validation_array as $key => $field ) {
 
 			if ( ! isset( $field['type'] ) ) {
@@ -80,7 +82,7 @@ class pfa_certificate_verifier_Handler {
 	 * Handle link sending
 	 */
 	public static function process_verify_certificate() {
-       global $Pfa_Certificate_Verify;
+       global $Axcelerate_Cert_Validation;
 	   global $wp;
 
 		if ( 'POST' !== strtoupper( $_SERVER[ 'REQUEST_METHOD' ] ) ) {
@@ -95,7 +97,7 @@ class pfa_certificate_verifier_Handler {
 			return;
 		}
 
-            pfa_certificate_verifier_Handler::pfa_form_validate($Pfa_Certificate_Verify->formFields);
+            axcelerate_certificate_verifier_Handler::axcelerate_form_validate($Axcelerate_Cert_Validation->formFields);
             
             $statementNumber = ! empty( $_POST[ 'statementNumber' ] ) ? wc_clean( $_POST[ 'statementNumber' ] ) : '';
             $firstName = ! empty( $_POST[ 'firstName' ] ) ? wc_clean( $_POST[ 'firstName' ] ) : '';
@@ -103,18 +105,18 @@ class pfa_certificate_verifier_Handler {
             $contactId = ! empty( $_POST[ 'contactId' ] ) ? wc_clean( $_POST[ 'contactId' ] ) : '';
 
 		if ( wc_notice_count( 'error' ) == 0 ) {
-			$results =  $Pfa_Certificate_Verify->actions->retrieve_certificate($statementNumber ,$firstName, $lastName, $contactId);
+			$results =  $Axcelerate_Cert_Validation->actions->retrieve_certificate($statementNumber ,$firstName, $lastName, $contactId);
 
 			if ($results == null ){
 				wc_add_notice( '<strong>No Certificate Found for data entered</strong> ', 'error' );
 				return;
 			}
 			
-			$Pfa_Certificate_Verify->successfulPost = true;
-			$Pfa_Certificate_Verify->result = $results;
+			$Axcelerate_Cert_Validation->successfulPost = true;
+			$Axcelerate_Cert_Validation->result = $results;
 			return;
 		}
 	}   
 }
 
-pfa_certificate_verifier_Handler::init();
+axcelerate_certificate_verifier_Handler::init();

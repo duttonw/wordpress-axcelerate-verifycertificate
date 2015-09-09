@@ -1,9 +1,11 @@
 <?php
 /**
- * WooCommerce Points and Rewards
+ * Axcelerate Certificate Validation
+ *
+ * Override this template by copying it to yourtheme/woocommerce/certificatesuccess.php
  *
  * @author 		William Dutton
- * @package 	Pfa_Certificate_Verify/Templates
+ * @package 	Axcelerate_Cert_Validation/Templates
  * @version     1.0.0
  * @copyright Copyright (c) 2015, Enhance Industries
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
@@ -21,7 +23,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 	<span class="certificate-verified">Verified Certificate Found</span><br/><br/>
 	
-	<!--Valid Yes/No <br/>-->
 	<div class="certificate-units">
 		<span class="certificate-units-title">Units of Competencies achieved:</span>
 		<ul class="certificate-units-values">
@@ -32,8 +33,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 		} ?>
 		</ul>
 	</div>
-	<?php //print_r($result); ?>
+	<?php //print_r($result); //debug output if you want to change what is displayed ?>
 
 	<form method="post">
-		<input type="submit" class="button" name="send_link" value="<?php _e( 'Check another Certificate', 'Pfa_Certificate_Verify' ); ?>" />
+		<input type="submit" class="button" name="send_link" value="<?php _e( 'Check another Certificate', 'Axcelerate_Cert_Validation' ); ?>" />
 	</form>

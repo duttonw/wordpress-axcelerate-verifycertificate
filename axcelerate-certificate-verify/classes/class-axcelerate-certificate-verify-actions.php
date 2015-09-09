@@ -1,9 +1,11 @@
 <?php
 /**
- * PFA certificate verify
+ * Axcelerate Certificate Validation
+ * 
+ * Admin actions and certificate verification function
  *
- * @class 		pfa_certificate_verifier_Actions
- * @package     Pfa_Certificate_Verify/Classes
+ * @class 		axcelerate_certificate_verifier_Actions
+ * @package     Axcelerate_Cert_Validation/Classes
  * @author      William Dutton
  * @category	Class
  * @copyright Copyright (c) 2015, Enhance Industries
@@ -17,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @since 1.0
  */
-class pfa_certificate_verifier_Actions {
+class axcelerate_certificate_verifier_Actions {
 	/**
 	 * Initialize the Certificate Verifier integration class
 	 *
@@ -45,47 +47,47 @@ class pfa_certificate_verifier_Actions {
 			$settings,
 			array(
 				array( 
-                'title' => __( 'Axcelerate Certificate Verifier Settings', 'Pfa_Certificate_Verify' ), 
+                'title' => __( 'Axcelerate Certificate Verifier Settings', 'Axcelerate_Cert_Validation' ), 
                 'type' => 'title', 
                  'desc' => '', 
                  'id' => 'certificate_verifier_settings' ),
 				 
 				 
 				array(
-            		'title'    => __( 'Axcelerate Url', 'Pfa_Certificate_Verify' ),
-            		'desc_tip' => __( 'Enter the Axcelerate Url.', 'Pfa_Certificate_Verify' ),
+            		'title'    => __( 'Axcelerate Url', 'Axcelerate_Cert_Validation' ),
+            		'desc_tip' => __( 'Enter the Axcelerate Url.', 'Axcelerate_Cert_Validation' ),
             		'id'       => 'axcelerate_url',
 					'default' => 'https://admin.axcelerate.com.au',
 					'type'     => 'text',
     	       ),
                array(
-            		'title'    => __( 'wstoken', 'Pfa_Certificate_Verify' ),
-            		'desc_tip' => __( 'ws token', 'Pfa_Certificate_Verify' ),
+            		'title'    => __( 'wstoken', 'Axcelerate_Cert_Validation' ),
+            		'desc_tip' => __( 'ws token', 'Axcelerate_Cert_Validation' ),
             		'id'       => 'axcelerate_wstoken',
                     'type'     => 'text',
                     'css'      => 'min-width: 400px;',
-                    //'default'  =>  __( '', 'Pfa_Certificate_Verify' ),
+                    //'default'  =>  __( '', 'Axcelerate_Cert_Validation' ),
     	       ),
                array(
-            		'title'    => __( 'apitoken', 'Pfa_Certificate_Verify' ),
-            		'desc_tip' => __( 'api token', 'Pfa_Certificate_Verify' ),
+            		'title'    => __( 'apitoken', 'Axcelerate_Cert_Validation' ),
+            		'desc_tip' => __( 'api token', 'Axcelerate_Cert_Validation' ),
             		'id'       => 'axcelerate_apitoken',
                     'type'     => 'text',
                     'css'      => 'min-width: 400px;',
-                    //'default'  =>  __( '', 'Pfa_Certificate_Verify' ),
+                    //'default'  =>  __( '', 'Axcelerate_Cert_Validation' ),
     	       ),
                
 			   array( 'type' => 'sectionend', 'id' => 'certificate_verifier_options_start' ),
 			   
             array( 
-                'title' => __( 'Certificate Verifier Page', 'Pfa_Certificate_Verify' ), 
+                'title' => __( 'Certificate Verifier Page', 'Axcelerate_Cert_Validation' ), 
                 'type' => 'title', 
-                'desc' => __( 'This pages need to be set so that WooCommerce knows where to send users to verify the Certificates.'  . ' [certificate_verifier_form]', 'Pfa_Certificate_Verify' ), 
+                'desc' => __( 'This pages need to be set so that WooCommerce knows where to send users to verify the Certificates.'  . ' [certificate_verifier_form]', 'Axcelerate_Cert_Validation' ), 
                  'id' => 'certificate_verifier_options' ),
 
 			array(
-				'title'    => __( 'Certificate Verifier Page', 'Pfa_Certificate_Verify' ),
-				'desc'     => __( 'Page contents:', 'Pfa_Certificate_Verify' ) . ' [certificate_verifier_form]',
+				'title'    => __( 'Certificate Verifier Page', 'Axcelerate_Cert_Validation' ),
+				'desc'     => __( 'Page contents:', 'Axcelerate_Cert_Validation' ) . ' [certificate_verifier_form]',
 				'id'       => 'woocommerce_certificate_verifier_form_page_id',
 				'type'     => 'single_select_page',
 				'default'  => '',

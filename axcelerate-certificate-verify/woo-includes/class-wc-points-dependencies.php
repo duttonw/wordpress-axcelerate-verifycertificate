@@ -1,6 +1,6 @@
 <?php
 /**
- * WC Points Dependency Checker
+ * Axcelerate Certificate Validation Dependency Checker
  *
  * Checks if WooCommerce points is enabled
  */

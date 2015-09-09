@@ -1,19 +1,19 @@
 <?php
 /**
- * Plugin Name: PFA certificate verify
- * Plugin URI: http://www.williamjdutton.com/pfa-certificate-verify
+ * Plugin Name: Axcelerate Certificate Validation
+ * Plugin URI: http://www.enhanceindustries.com.au/axcelerate-certificate-verify
  * Description: Allows clients to verify if their certificate is still valid
  * Author: William Dutton
- * Author URI: http://www.williamjdutton.com
+ * Author URI: http://www.enhanceindustries.com.au/williamjdutton
  * Version: 1.0.0
- * Text Domain: Pfa_Certificate_Verify
+ * Text Domain: Axcelerate_Cert_Validation
  * Domain Path: /languages/
  *
  *
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  *
- * @package   WC-Certificate-Verify
+ * @package   Axcelerate_Cert_Validation
  * @author    William Dutton
  * @category  Marketing
  * @copyright Copyright (c) 2015, Enhance Industries
@@ -37,13 +37,13 @@ if ( ! is_woocommerce_active() )
 	return;
 
 /**
- * The Pfa_Certificate_Verify global object
- * @name $Pfa_Certificate_Verify
- * @global Pfa_Certificate_Verify $GLOBALS['Pfa_Certificate_Verify']
+ * The Axcelerate_Cert_Validation global object
+ * @name $Axcelerate_Cert_Validation
+ * @global Axcelerate_Cert_Validation $GLOBALS['Axcelerate_Cert_Validation']
  */
-$GLOBALS['Pfa_Certificate_Verify'] = new Pfa_Certificate_Verify();
+$GLOBALS['Axcelerate_Cert_Validation'] = new Axcelerate_Cert_Validation();
 
-class Pfa_Certificate_Verify {
+class Axcelerate_Cert_Validation {
 
 	/** plugin version number */
 	const VERSION = '1.0.0';
@@ -57,10 +57,10 @@ class Pfa_Certificate_Verify {
 	/** @var \WC_Logger instance */
 	private $logger;
 	
-	/** @var \Pfa_Certificate_Verify_Admin admin class */
+	/** @var \Axcelerate_Cert_Validation_Admin admin class */
 	private $admin;
 
-	/** @var \Pfa_Certificate_Verify_Admin product admin class */
+	/** @var \Axcelerate_Cert_Validation_Admin product admin class */
 	private $product_admin;
 
 	/** @var WP_Admin_Message_Handler admin message handler class */
@@ -68,7 +68,7 @@ class Pfa_Certificate_Verify {
     
     public $formFields;
 
-	/** @var Pfa_Certificate_Verify_Actions the core actions integration */
+	/** @var Axcelerate_Cert_Validation_Actions the core actions integration */
 	public $actions;
 	
 	public $successfulPost;
@@ -91,7 +91,7 @@ class Pfa_Certificate_Verify {
 		add_action( 'init', array( $this, 'load_translation' ) );
 		add_action( 'init', array( $this, 'include_template_functions' ), 25 );
 
-        add_action( 'init', array( 'pfa_certificate_verifier_Shortcodes', 'init' ) );
+        add_action( 'init', array( 'axcelerate_certificate_verifier_Shortcodes', 'init' ) );
 
 		// admin
 		if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
@@ -116,15 +116,9 @@ class Pfa_Certificate_Verify {
 	 */
 	public function load_translation() {
 		// localization in the init action for WPML support
-		load_plugin_textdomain( 'Pfa_Certificate_Verify', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+		load_plugin_textdomain( 'Axcelerate_Cert_Validation', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 	}
     
-    /**
-	 * Function used to init Points to Link Sned template functions,
-	 * making them pluggable by plugins and themes.
-	 *
-	 * @since 1.0
-	 */
 	public function include_template_functions() {
 	}
     
@@ -137,7 +131,7 @@ class Pfa_Certificate_Verify {
 
         $this->formFields = array (
                 'firstName' => array(
-    				'title'    => __( 'First Name:', 'Pfa_Certificate_Verify' ),
+    				'title'    => __( 'First Name:', 'Axcelerate_Cert_Validation' ),
     				'label'             => 'First Name:',
     				'description'       => '',
     				'id'       => 'firstName',
@@ -148,7 +142,7 @@ class Pfa_Certificate_Verify {
                     'required' => true,
                 ),
                 'lastName' => array(
-    				'title'    => __( 'Last Name:', 'Pfa_Certificate_Verify' ),
+    				'title'    => __( 'Last Name:', 'Axcelerate_Cert_Validation' ),
     				'label'             => 'Last Name:',
     				'description'       => '',
     				'id'       => 'lastName',
@@ -159,7 +153,7 @@ class Pfa_Certificate_Verify {
                     'required' => true,
                 ),
                 'contactId' => array(
-    				'title'    => __( 'Contact ID / Student Number:', 'Pfa_Certificate_Verify' ),
+    				'title'    => __( 'Contact ID / Student Number:', 'Axcelerate_Cert_Validation' ),
     				'label'             => 'Contact ID / Student Number:',
     				'description'       => '',
     				'id'       => 'contactId',
@@ -170,7 +164,7 @@ class Pfa_Certificate_Verify {
                     'required' => true,
                 ),
                 'statementNumber' => array(
-    				'title'    => __( 'Statement of Attainment Number:', 'Pfa_Certificate_Verify' ),
+    				'title'    => __( 'Statement of Attainment Number:', 'Axcelerate_Cert_Validation' ),
     				'label'             => 'Statement of Attainment Number:',
     				'description'       => '',
     				'id'       => 'statementNumber',
@@ -183,18 +177,19 @@ class Pfa_Certificate_Verify {
                 
 			);
 
+		//may need to be exploded if run on shared hosting which does not allow the .phar archive.
         include('lib/httpful.phar');
         
         // actions class
-        require( 'classes/class-pfa-certificate-verify-actions.php');
-        $this->actions = new pfa_certificate_verifier_Actions();
+        require( 'classes/class-axcelerate-certificate-verify-actions.php');
+        $this->actions = new axcelerate_certificate_verifier_Actions();
         
         if ( ! is_admin() || defined( 'DOING_AJAX' ) ) {
 			// Classes
-			include_once( 'classes/class-pfa-certificate-verify-form-handler.php' );                    //Form Handlers
-			include_once( 'shortcodes/class-pfa-certificate-verify-form.php' );                       // A Shortcode class
+			include_once( 'classes/class-axcelerate-certificate-verify-form-handler.php' );                    //Form Handlers
+			include_once( 'shortcodes/class-axcelerate-certificate-verify-form.php' );                       // A Shortcode class
 		}
-			include_once( 'classes/class-pfa-certificate-verify-shortcodes.php' );                     // Shortcodes class
+			include_once( 'classes/class-axcelerate-certificate-verify-shortcodes.php' );                     // Shortcodes class
 		if ( is_admin() )
 			$this->admin_includes();
 	}
@@ -247,7 +242,7 @@ class Pfa_Certificate_Verify {
 	private function install() {
 
 		// get current version to check for upgrade
-		$installed_version = get_option( 'Pfa_Certificate_Verify_version' );
+		$installed_version = get_option( 'Axcelerate_Cert_Validation_version' );
 
 		// install
 		if ( ! $installed_version ) {
@@ -269,7 +264,7 @@ class Pfa_Certificate_Verify {
 	private function upgrade( $installed_version ) {
 
 		// update the installed version option
-		update_option( 'Pfa_Certificate_Verify_version', self::VERSION );
+		update_option( 'Axcelerate_Cert_Validation_version', self::VERSION );
 	}
 
-} // end \Pfa_Certificate_Verify class (note the newline after this line)
+} // end \Axcelerate_Cert_Validation class (note the newline after this line)

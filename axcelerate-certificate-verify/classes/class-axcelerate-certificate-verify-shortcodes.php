@@ -1,14 +1,16 @@
 <?php
 /**
- * PFA certificate verify
+ * Axcelerate Certificate Validation
  *
- * @class 		pfa_certificate_verifier_Shortcodes
- * @package     Pfa_Certificate_Verify/Classes
+ * Handle shortcode initialization
+ * 
+ * @class 		axcelerate_certificate_verifier_Shortcodes
+ * @package     Axcelerate_Cert_Validation/Classes
  * @author      William Dutton
  * @copyright   Copyright (c) 2015, Enhance Industries
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
-class pfa_certificate_verifier_Shortcodes {
+class axcelerate_certificate_verifier_Shortcodes {
 
 	/**
 	 * Init shortcodes
