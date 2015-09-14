@@ -166,10 +166,13 @@ class axcelerate_certificate_verifier_Actions {
 			}
 		}
 		
+		$input_data = array();
+		array_push($input_data, $statementNumber, $firstName, $lastName, $contactId);
+		
 		//This should return subjects, outcomes and any other information you might need regarding the enrolment.
 		return array("certificate" => $verifyCertificate->body->DOCUMENT,
 				"enrolmentsOnCertificate" =>  $enrolementsOnCertificate,
-				"courses" => $courses, );
+				"courses" => $courses, "input_data" => $input_data );
 	}
 }
 ?>

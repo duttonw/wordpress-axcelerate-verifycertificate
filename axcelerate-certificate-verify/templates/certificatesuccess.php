@@ -21,8 +21,23 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 ?>
 <?php wc_print_notices(); ?>
 
-	<span class="certificate-verified">Verified Certificate Found</span><br/><br/>
-	
+	<div id="verified-wrapper">
+		<img src="/wp-content/uploads/2015/09/greentick.png" />
+		<span class="certificate-verified">Verified Certificate Found</span>
+	</div>
+<br/><br/>
+	<div class="certificate-details-input">
+		<span class="certificate-name">First Name: <?php echo $result['input_data'][1]; ?></span><br/>
+		<span class="certificate-name">Last Name: <?php echo $result['input_data'][2]; ?></span><br/>
+		<span class="certificate-name">Contact ID: <?php echo $result['input_data'][3]; ?></span><br/>
+		<span class="certificate-name">Statement Number: <?php echo $result['input_data'][0]; ?></span><br/>
+		<span class="certificate-title">Cerfiticate Name:</span>
+		<span class="certificate-value"><?php echo $result['enrolmentsOnCertificate'][0]->NAME; ?></span><br/>
+		<span class="certificate-completiondate-title">Completed On:</span>
+		<span class="certificate-completiondate"><?php echo date_i18n( get_option( 'date_format' ), strtotime( $result['enrolmentsOnCertificate'][0]->COMPLETIONDATE ) ); ?></span><br/>
+		<span class="certificate-status-title">Status:</span>
+		<span class="certificate-status"><?php echo $result['enrolmentsOnCertificate'][0]->STATUS ?></span>
+	</div>
 	<div class="certificate-units">
 		<span class="certificate-units-title">Units of Competencies achieved:</span>
 		<ul class="certificate-units-values">
